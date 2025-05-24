@@ -11,98 +11,158 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as ResultsImport } from './routes/results'
-import { Route as AcademyImport } from './routes/academy'
-import { Route as IndexImport } from './routes/index'
+import { Route as MainLayoutImport } from './routes/_mainLayout'
+import { Route as AcademyLayoutImport } from './routes/_academyLayout'
+import { Route as MainLayoutIndexImport } from './routes/_mainLayout.index'
+import { Route as MainLayoutResultsImport } from './routes/_mainLayout.results'
+import { Route as AcademyLayoutAcademyImport } from './routes/_academyLayout.academy'
 
 // Create/Update Routes
 
-const ResultsRoute = ResultsImport.update({
-  id: '/results',
-  path: '/results',
+const MainLayoutRoute = MainLayoutImport.update({
+  id: '/_mainLayout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const AcademyRoute = AcademyImport.update({
-  id: '/academy',
-  path: '/academy',
+const AcademyLayoutRoute = AcademyLayoutImport.update({
+  id: '/_academyLayout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const MainLayoutIndexRoute = MainLayoutIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+
+const MainLayoutResultsRoute = MainLayoutResultsImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+
+const AcademyLayoutAcademyRoute = AcademyLayoutAcademyImport.update({
+  id: '/academy',
+  path: '/academy',
+  getParentRoute: () => AcademyLayoutRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+    '/_academyLayout': {
+      id: '/_academyLayout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AcademyLayoutImport
       parentRoute: typeof rootRoute
     }
-    '/academy': {
-      id: '/academy'
+    '/_mainLayout': {
+      id: '/_mainLayout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof MainLayoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/_academyLayout/academy': {
+      id: '/_academyLayout/academy'
       path: '/academy'
       fullPath: '/academy'
-      preLoaderRoute: typeof AcademyImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AcademyLayoutAcademyImport
+      parentRoute: typeof AcademyLayoutImport
     }
-    '/results': {
-      id: '/results'
+    '/_mainLayout/results': {
+      id: '/_mainLayout/results'
       path: '/results'
       fullPath: '/results'
-      preLoaderRoute: typeof ResultsImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof MainLayoutResultsImport
+      parentRoute: typeof MainLayoutImport
+    }
+    '/_mainLayout/': {
+      id: '/_mainLayout/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof MainLayoutIndexImport
+      parentRoute: typeof MainLayoutImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface AcademyLayoutRouteChildren {
+  AcademyLayoutAcademyRoute: typeof AcademyLayoutAcademyRoute
+}
+
+const AcademyLayoutRouteChildren: AcademyLayoutRouteChildren = {
+  AcademyLayoutAcademyRoute: AcademyLayoutAcademyRoute,
+}
+
+const AcademyLayoutRouteWithChildren = AcademyLayoutRoute._addFileChildren(
+  AcademyLayoutRouteChildren,
+)
+
+interface MainLayoutRouteChildren {
+  MainLayoutResultsRoute: typeof MainLayoutResultsRoute
+  MainLayoutIndexRoute: typeof MainLayoutIndexRoute
+}
+
+const MainLayoutRouteChildren: MainLayoutRouteChildren = {
+  MainLayoutResultsRoute: MainLayoutResultsRoute,
+  MainLayoutIndexRoute: MainLayoutIndexRoute,
+}
+
+const MainLayoutRouteWithChildren = MainLayoutRoute._addFileChildren(
+  MainLayoutRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/academy': typeof AcademyRoute
-  '/results': typeof ResultsRoute
+  '': typeof MainLayoutRouteWithChildren
+  '/academy': typeof AcademyLayoutAcademyRoute
+  '/results': typeof MainLayoutResultsRoute
+  '/': typeof MainLayoutIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/academy': typeof AcademyRoute
-  '/results': typeof ResultsRoute
+  '': typeof AcademyLayoutRouteWithChildren
+  '/academy': typeof AcademyLayoutAcademyRoute
+  '/results': typeof MainLayoutResultsRoute
+  '/': typeof MainLayoutIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/academy': typeof AcademyRoute
-  '/results': typeof ResultsRoute
+  '/_academyLayout': typeof AcademyLayoutRouteWithChildren
+  '/_mainLayout': typeof MainLayoutRouteWithChildren
+  '/_academyLayout/academy': typeof AcademyLayoutAcademyRoute
+  '/_mainLayout/results': typeof MainLayoutResultsRoute
+  '/_mainLayout/': typeof MainLayoutIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/academy' | '/results'
+  fullPaths: '' | '/academy' | '/results' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/academy' | '/results'
-  id: '__root__' | '/' | '/academy' | '/results'
+  to: '' | '/academy' | '/results' | '/'
+  id:
+    | '__root__'
+    | '/_academyLayout'
+    | '/_mainLayout'
+    | '/_academyLayout/academy'
+    | '/_mainLayout/results'
+    | '/_mainLayout/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AcademyRoute: typeof AcademyRoute
-  ResultsRoute: typeof ResultsRoute
+  AcademyLayoutRoute: typeof AcademyLayoutRouteWithChildren
+  MainLayoutRoute: typeof MainLayoutRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AcademyRoute: AcademyRoute,
-  ResultsRoute: ResultsRoute,
+  AcademyLayoutRoute: AcademyLayoutRouteWithChildren,
+  MainLayoutRoute: MainLayoutRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -115,19 +175,34 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/academy",
-        "/results"
+        "/_academyLayout",
+        "/_mainLayout"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_academyLayout": {
+      "filePath": "_academyLayout.tsx",
+      "children": [
+        "/_academyLayout/academy"
+      ]
     },
-    "/academy": {
-      "filePath": "academy.tsx"
+    "/_mainLayout": {
+      "filePath": "_mainLayout.tsx",
+      "children": [
+        "/_mainLayout/results",
+        "/_mainLayout/"
+      ]
     },
-    "/results": {
-      "filePath": "results.tsx"
+    "/_academyLayout/academy": {
+      "filePath": "_academyLayout.academy.tsx",
+      "parent": "/_academyLayout"
+    },
+    "/_mainLayout/results": {
+      "filePath": "_mainLayout.results.tsx",
+      "parent": "/_mainLayout"
+    },
+    "/_mainLayout/": {
+      "filePath": "_mainLayout.index.tsx",
+      "parent": "/_mainLayout"
     }
   }
 }
