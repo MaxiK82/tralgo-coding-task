@@ -1,68 +1,89 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme {
+  --font-sans: Arial;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  --color-tralgo-gray-50: #f6f6f6;
+  --color-tralgo-gray-100: #e7e7e7;
+  --color-tralgo-gray-200: #d1d1d1;
+  --color-tralgo-gray-300: #b0b0b0;
+  --color-tralgo-gray-400: #888888;
+  --color-tralgo-gray-500: #6d6d6d;
+  --color-tralgo-gray-600: #5d5d5d;
+  --color-tralgo-gray-700: #4f4f4f;
+  --color-tralgo-gray-800: #454545;
+  --color-tralgo-gray-900: #3d3d3d;
+  --color-tralgo-gray-950: #121212;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  --color-tralgo-blue-50: #f0f7ff;
+  --color-tralgo-blue-100: #e1eefd;
+  --color-tralgo-blue-200: #bbddfc;
+  --color-tralgo-blue-300: #7fc1fa;
+  --color-tralgo-blue-400: #3ca2f4;
+  --color-tralgo-blue-500: #1c8fed;
+  --color-tralgo-blue-600: #0669c3;
+  --color-tralgo-blue-700: #06539e;
+  --color-tralgo-blue-800: #094783;
+  --color-tralgo-blue-900: #0e3d6c;
+  --color-tralgo-blue-950: #092648;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  --color-tralgo-lochmara-50: #f1f8fe;
+  --color-tralgo-lochmara-100: #e2f0fc;
+  --color-tralgo-lochmara-200: #bfe0f8;
+  --color-tralgo-lochmara-300: #87c9f2;
+  --color-tralgo-lochmara-400: #47ace9;
+  --color-tralgo-lochmara-500: #1f92d8;
+  --color-tralgo-lochmara-600: #127ac2;
+  --color-tralgo-lochmara-700: #0f5c95;
+  --color-tralgo-lochmara-800: #114f7b;
+  --color-tralgo-lochmara-900: #134267;
+  --color-tralgo-lochmara-950: #0d2a44;
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+  --color-tralgo-matisse-50: #f1f9fe;
+  --color-tralgo-matisse-100: #e2f2fc;
+  --color-tralgo-matisse-200: #bee4f9;
+  --color-tralgo-matisse-300: #84cff5;
+  --color-tralgo-matisse-400: #43b7ed;
+  --color-tralgo-matisse-500: #1a9edd;
+  --color-tralgo-matisse-600: #0d7ebc;
+  --color-tralgo-matisse-700: #0d6ea6;
+  --color-tralgo-matisse-800: #0e567e;
+  --color-tralgo-matisse-900: #124868;
+  --color-tralgo-matisse-950: #0c2d45;
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+  --color-tralgo-stone-50: #eef9ff;
+  --color-tralgo-stone-100: #dcf4ff;
+  --color-tralgo-stone-200: #b2ebff;
+  --color-tralgo-stone-300: #6ddcff;
+  --color-tralgo-stone-400: #20cbff;
+  --color-tralgo-stone-500: #00b5ff;
+  --color-tralgo-stone-600: #0091df;
+  --color-tralgo-stone-700: #0073b4;
+  --color-tralgo-stone-800: #006195;
+  --color-tralgo-stone-900: #00507a;
+  --color-tralgo-stone-950: #002135;
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  --color-tralgo-iron-50: #f6f7f8;
+  --color-tralgo-iron-100: #eaedef;
+  --color-tralgo-iron-200: #ced4d9;
+  --color-tralgo-iron-300: #c1c9cf;
+  --color-tralgo-iron-400: #a3aeb7;
+  --color-tralgo-iron-500: #8c99a5;
+  --color-tralgo-iron-600: #7b8695;
+  --color-tralgo-iron-700: #6e7887;
+  --color-tralgo-iron-800: #5d6370;
+  --color-tralgo-iron-900: #4d525b;
+  --color-tralgo-iron-950: #323439;
+
+  --color-tralgo-shark-50: #f6f6f6;
+  --color-tralgo-shark-100: #e7e7e7;
+  --color-tralgo-shark-200: #d1d1d1;
+  --color-tralgo-shark-300: #b0b0b0;
+  --color-tralgo-shark-400: #888888;
+  --color-tralgo-shark-500: #6d6d6d;
+  --color-tralgo-shark-600: #5d5d5d;
+  --color-tralgo-shark-700: #4f4f4f;
+  --color-tralgo-shark-800: #454545;
+  --color-tralgo-shark-900: #3d3d3d;
+  --color-tralgo-shark-950: #1e1e1e;
 }
