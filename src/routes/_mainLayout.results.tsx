@@ -7,7 +7,7 @@ export const Route = createFileRoute('/_mainLayout/results')({
 function RouteComponent() {
   return (
     <div className="-mt-28">
-      <header className="py-10 hidden">
+      <header className="sr-only">
         <h1 className="text-3xl font-bold tracking-tight text-white">Ergebnisse</h1>
       </header>
       <main>

@@ -6,23 +6,41 @@ export const Route = createFileRoute('/_academyLayout/academy')({
 
 function RouteComponent() {
   return (
-    <div className="-mt-28">
-      <header className="py-10 hidden">
-        <h1 className="text-3xl font-bold tracking-tight text-white">Academy</h1>
-      </header>
-      <main>
-        <div className="mx-auto max-w-8xl px-4 pb-12 sm:px-6 lg:px-8 text-white">
-          <div className="rounded-lg bg-tralgo-gray-950 px-5 py-6 shadow-sm sm:px-6 text-center">
-            <h2 className='text-4xl mb-8'>Academy</h2>
-            <p className='text-md'>"Unsere Trades sind nicht nur Versprechen – sie sind Ergebnisse."<br />
-              Erlebe messbare Erfolge und lerne von den Besten, die ihre<br />
-              Gewinne kontinuierlich steigern.</p>
-            <div className='mx-auto max-w-7xl mt-8 mb-8'>
-              <iframe className='w-full aspect-video rounded-b-md' width="auto" height="auto" src="https://www.youtube.com/embed/Tb3jCjNIemU?si=egdcnPiQyStqbSI_" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+    <>
+      <main className="-mt-24 pb-8">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+          <h1 className="sr-only">Page title</h1>
+          {/* Main 3 column grid */}
+          <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
+            {/* Left column */}
+            <div className="grid grid-cols-1 gap-4 lg:col-span-2">
+              <section aria-labelledby="section-1-title">
+                <h2 id="section-1-title" className="sr-only">
+                  Section title
+                </h2>
+                <div className="overflow-hidden rounded-lg bg-white shadow-sm">
+                  <div className="p-6">
+                    <iframe className='w-full aspect-video rounded-b-md' width="auto" height="auto" src="https://www.youtube.com/embed/Tb3jCjNIemU?si=egdcnPiQyStqbSI_" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            {/* Right column */}
+            <div className="grid grid-cols-1 gap-4">
+              <section aria-labelledby="section-2-title">
+                <h2 id="section-2-title" className="sr-only">
+                  Section title
+                </h2>
+                <div className="overflow-hidden rounded-lg bg-white shadow-sm">
+                  <div className="p-6">{/* Your content */}</div>
+                </div>
+              </section>
             </div>
           </div>
         </div>
       </main>
-    </div>
+
+    </>
   )
 }
