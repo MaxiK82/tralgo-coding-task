@@ -13,7 +13,7 @@ export const Layout = ({ children }: any) => (
 	<div className="min-h-full">
 		<div className="bg-tralgo-gray-950 pb-32">
 			<Disclosure as="nav" className="bg-tralgo-gray-950">
-				<div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+				<div className="mx-auto lg:max-w-[1920px] sm:px-6 lg:px-8">
 					<div className="p-3">
 						<div className="flex h-16 items-center justify-between px-4 sm:px-0">
 							<div className="flex items-center">
