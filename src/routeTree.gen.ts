@@ -12,10 +12,11 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as MainLayoutImport } from './routes/_mainLayout'
-import { Route as AcademyLayoutImport } from './routes/_academyLayout'
+import { Route as IntradayIndexImport } from './routes/intraday/index'
 import { Route as MainLayoutIndexImport } from './routes/_mainLayout.index'
 import { Route as MainLayoutResultsImport } from './routes/_mainLayout.results'
-import { Route as AcademyLayoutAcademyImport } from './routes/_academyLayout.academy'
+import { Route as IntradayMarktanalyseIndexImport } from './routes/intraday/marktanalyse/index'
+import { Route as IntradayMarktanalyseVorgehensweiseImTradingIndexImport } from './routes/intraday/marktanalyse/vorgehensweise-im-trading/index'
 
 // Create/Update Routes
 
@@ -24,8 +25,9 @@ const MainLayoutRoute = MainLayoutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AcademyLayoutRoute = AcademyLayoutImport.update({
-  id: '/_academyLayout',
+const IntradayIndexRoute = IntradayIndexImport.update({
+  id: '/intraday/',
+  path: '/intraday/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -41,36 +43,29 @@ const MainLayoutResultsRoute = MainLayoutResultsImport.update({
   getParentRoute: () => MainLayoutRoute,
 } as any)
 
-const AcademyLayoutAcademyRoute = AcademyLayoutAcademyImport.update({
-  id: '/academy',
-  path: '/academy',
-  getParentRoute: () => AcademyLayoutRoute,
+const IntradayMarktanalyseIndexRoute = IntradayMarktanalyseIndexImport.update({
+  id: '/intraday/marktanalyse/',
+  path: '/intraday/marktanalyse/',
+  getParentRoute: () => rootRoute,
 } as any)
+
+const IntradayMarktanalyseVorgehensweiseImTradingIndexRoute =
+  IntradayMarktanalyseVorgehensweiseImTradingIndexImport.update({
+    id: '/intraday/marktanalyse/vorgehensweise-im-trading/',
+    path: '/intraday/marktanalyse/vorgehensweise-im-trading/',
+    getParentRoute: () => rootRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_academyLayout': {
-      id: '/_academyLayout'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AcademyLayoutImport
-      parentRoute: typeof rootRoute
-    }
     '/_mainLayout': {
       id: '/_mainLayout'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof MainLayoutImport
       parentRoute: typeof rootRoute
-    }
-    '/_academyLayout/academy': {
-      id: '/_academyLayout/academy'
-      path: '/academy'
-      fullPath: '/academy'
-      preLoaderRoute: typeof AcademyLayoutAcademyImport
-      parentRoute: typeof AcademyLayoutImport
     }
     '/_mainLayout/results': {
       id: '/_mainLayout/results'
@@ -86,22 +81,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainLayoutIndexImport
       parentRoute: typeof MainLayoutImport
     }
+    '/intraday/': {
+      id: '/intraday/'
+      path: '/intraday'
+      fullPath: '/intraday'
+      preLoaderRoute: typeof IntradayIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/intraday/marktanalyse/': {
+      id: '/intraday/marktanalyse/'
+      path: '/intraday/marktanalyse'
+      fullPath: '/intraday/marktanalyse'
+      preLoaderRoute: typeof IntradayMarktanalyseIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/intraday/marktanalyse/vorgehensweise-im-trading/': {
+      id: '/intraday/marktanalyse/vorgehensweise-im-trading/'
+      path: '/intraday/marktanalyse/vorgehensweise-im-trading'
+      fullPath: '/intraday/marktanalyse/vorgehensweise-im-trading'
+      preLoaderRoute: typeof IntradayMarktanalyseVorgehensweiseImTradingIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
-
-interface AcademyLayoutRouteChildren {
-  AcademyLayoutAcademyRoute: typeof AcademyLayoutAcademyRoute
-}
-
-const AcademyLayoutRouteChildren: AcademyLayoutRouteChildren = {
-  AcademyLayoutAcademyRoute: AcademyLayoutAcademyRoute,
-}
-
-const AcademyLayoutRouteWithChildren = AcademyLayoutRoute._addFileChildren(
-  AcademyLayoutRouteChildren,
-)
 
 interface MainLayoutRouteChildren {
   MainLayoutResultsRoute: typeof MainLayoutResultsRoute
@@ -119,50 +123,71 @@ const MainLayoutRouteWithChildren = MainLayoutRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof MainLayoutRouteWithChildren
-  '/academy': typeof AcademyLayoutAcademyRoute
   '/results': typeof MainLayoutResultsRoute
   '/': typeof MainLayoutIndexRoute
+  '/intraday': typeof IntradayIndexRoute
+  '/intraday/marktanalyse': typeof IntradayMarktanalyseIndexRoute
+  '/intraday/marktanalyse/vorgehensweise-im-trading': typeof IntradayMarktanalyseVorgehensweiseImTradingIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '': typeof AcademyLayoutRouteWithChildren
-  '/academy': typeof AcademyLayoutAcademyRoute
   '/results': typeof MainLayoutResultsRoute
   '/': typeof MainLayoutIndexRoute
+  '/intraday': typeof IntradayIndexRoute
+  '/intraday/marktanalyse': typeof IntradayMarktanalyseIndexRoute
+  '/intraday/marktanalyse/vorgehensweise-im-trading': typeof IntradayMarktanalyseVorgehensweiseImTradingIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/_academyLayout': typeof AcademyLayoutRouteWithChildren
   '/_mainLayout': typeof MainLayoutRouteWithChildren
-  '/_academyLayout/academy': typeof AcademyLayoutAcademyRoute
   '/_mainLayout/results': typeof MainLayoutResultsRoute
   '/_mainLayout/': typeof MainLayoutIndexRoute
+  '/intraday/': typeof IntradayIndexRoute
+  '/intraday/marktanalyse/': typeof IntradayMarktanalyseIndexRoute
+  '/intraday/marktanalyse/vorgehensweise-im-trading/': typeof IntradayMarktanalyseVorgehensweiseImTradingIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/academy' | '/results' | '/'
+  fullPaths:
+    | ''
+    | '/results'
+    | '/'
+    | '/intraday'
+    | '/intraday/marktanalyse'
+    | '/intraday/marktanalyse/vorgehensweise-im-trading'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/academy' | '/results' | '/'
+  to:
+    | '/results'
+    | '/'
+    | '/intraday'
+    | '/intraday/marktanalyse'
+    | '/intraday/marktanalyse/vorgehensweise-im-trading'
   id:
     | '__root__'
-    | '/_academyLayout'
     | '/_mainLayout'
-    | '/_academyLayout/academy'
     | '/_mainLayout/results'
     | '/_mainLayout/'
+    | '/intraday/'
+    | '/intraday/marktanalyse/'
+    | '/intraday/marktanalyse/vorgehensweise-im-trading/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  AcademyLayoutRoute: typeof AcademyLayoutRouteWithChildren
   MainLayoutRoute: typeof MainLayoutRouteWithChildren
+  IntradayIndexRoute: typeof IntradayIndexRoute
+  IntradayMarktanalyseIndexRoute: typeof IntradayMarktanalyseIndexRoute
+  IntradayMarktanalyseVorgehensweiseImTradingIndexRoute: typeof IntradayMarktanalyseVorgehensweiseImTradingIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  AcademyLayoutRoute: AcademyLayoutRouteWithChildren,
   MainLayoutRoute: MainLayoutRouteWithChildren,
+  IntradayIndexRoute: IntradayIndexRoute,
+  IntradayMarktanalyseIndexRoute: IntradayMarktanalyseIndexRoute,
+  IntradayMarktanalyseVorgehensweiseImTradingIndexRoute:
+    IntradayMarktanalyseVorgehensweiseImTradingIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -175,14 +200,10 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_academyLayout",
-        "/_mainLayout"
-      ]
-    },
-    "/_academyLayout": {
-      "filePath": "_academyLayout.tsx",
-      "children": [
-        "/_academyLayout/academy"
+        "/_mainLayout",
+        "/intraday/",
+        "/intraday/marktanalyse/",
+        "/intraday/marktanalyse/vorgehensweise-im-trading/"
       ]
     },
     "/_mainLayout": {
@@ -192,10 +213,6 @@ export const routeTree = rootRoute
         "/_mainLayout/"
       ]
     },
-    "/_academyLayout/academy": {
-      "filePath": "_academyLayout.academy.tsx",
-      "parent": "/_academyLayout"
-    },
     "/_mainLayout/results": {
       "filePath": "_mainLayout.results.tsx",
       "parent": "/_mainLayout"
@@ -203,6 +220,15 @@ export const routeTree = rootRoute
     "/_mainLayout/": {
       "filePath": "_mainLayout.index.tsx",
       "parent": "/_mainLayout"
+    },
+    "/intraday/": {
+      "filePath": "intraday/index.tsx"
+    },
+    "/intraday/marktanalyse/": {
+      "filePath": "intraday/marktanalyse/index.tsx"
+    },
+    "/intraday/marktanalyse/vorgehensweise-im-trading/": {
+      "filePath": "intraday/marktanalyse/vorgehensweise-im-trading/index.tsx"
     }
   }
 }

@@ -1,12 +1,12 @@
 import { Link } from '@tanstack/react-router'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Footer } from '../components'
+import { Footer } from '@/components'
 
 const navigation = [
 	{ name: 'Startseite', href: '/' },
 	{ name: 'Ergebnisse', href: '/results' },
-	{ name: 'Academy', href: '/academy' },
+	{ name: 'Academy', href: '/intraday' },
 ]
 
 export const Layout = ({ children }: any) => (
@@ -33,7 +33,7 @@ export const Layout = ({ children }: any) => (
 												key={item.name}
 												to={item.href}
 												className='rounded-md px-3 py-2 text-lg hover:text-tralgo-blue-500'
-												activeOptions={{ exact: true }}
+												activeOptions={{ includeHash: true }}
 												activeProps={{
 													className: 'text-tralgo-blue-500',
 												}}

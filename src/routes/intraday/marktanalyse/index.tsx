@@ -1,13 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { CheckIcon, HandThumbUpIcon, UserIcon, EllipsisVerticalIcon } from '@heroicons/react/20/solid'
-import { HomeIcon } from '@heroicons/react/20/solid'
-import { ProgressBar, VideoWrapper } from '../components'
-
-const pages = [
-  { name: 'Intraday', href: '#', current: false },
-  { name: 'Phase 4: Die Marktanalyse', href: '#', current: true },
-  { name: 'Tradingarten und Stile', href: '#', current: true },
-]
+import { createRoute } from '@tanstack/react-router'
+import { CheckIcon, EllipsisVerticalIcon } from '@heroicons/react/20/solid'
+import { Breadcrumb, ProgressBar, VideoWrapper } from '@/components'
+import { Route as RootRoute } from '@/routes/__root'
+import { Layout } from '@/layouts/Layout'
 
 const timeline = [
   {
@@ -79,50 +74,18 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export const Route = createFileRoute('/_academyLayout/academy')({
-  component: RouteComponent,
+export const Route = createRoute({
+  getParentRoute: () => RootRoute,
+  path: 'intraday/marktanalyse',
+  component: () => <Layout><RouteComponent /></Layout>,
 })
+
 
 function RouteComponent() {
   return (
     <>
       <main className="-mt-24 pb-8">
-        <div className='mx-auto max-w-3xl lg:max-w-[1920px]'>
-          <nav aria-label="Breadcrumb" className="flex border-b border-gray-200 bg-white max-w-3xl px-4 sm:px-6 lg:px-8 lg:max-w-[1856px] mb-8 mx-8 rounded-md">
-            <ol role="list" className="mx-auto flex w-full space-x-4 px-4 sm:px-6 lg:px-8">
-              <li className="flex">
-                <div className="flex items-center">
-                  <a href="/academy" className="text-tralgo-matisse-700 hover:text-gray-500">
-                    <HomeIcon aria-hidden="true" className="size-5 shrink-0" />
-                    <span className="sr-only">Home</span>
-                  </a>
-                </div>
-              </li>
-              {pages.map((page) => (
-                <li key={page.name} className="flex">
-                  <div className="flex items-center">
-                    <svg
-                      fill="currentColor"
-                      viewBox="0 0 24 44"
-                      preserveAspectRatio="none"
-                      aria-hidden="true"
-                      className="h-full w-6 shrink-0 text-gray-200"
-                    >
-                      <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-                    </svg>
-                    <a
-                      href={page.href}
-                      aria-current={page.current ? 'page' : undefined}
-                      className="ml-4 text-sm font-medium text-tralgo-matisse-700 hover:text-gray-700"
-                    >
-                      {page.name}
-                    </a>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </nav>
-        </div>
+        <Breadcrumb />
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 lg:max-w-[1920px]">
           <h1 className="sr-only">Academy</h1>
           {/* Main 3 column grid */}
@@ -134,7 +97,7 @@ function RouteComponent() {
                   Academy Lernvideo
                 </h2>
                 <div className="overflow-hidden rounded-lg bg-white shadow-sm p-6">
-                  <p className='mb-4 font-bold text-2xl text-tralgo-matisse-700'>Vorgehensweisen im Trading</p>
+                  <p className='mb-4 font-bold text-2xl text-tralgo-matisse-700'>Marktanalyse</p>
                   <VideoWrapper youTubeUrl='https://www.youtube.com/embed/Tb3jCjNIemU?si=egdcnPiQyStqbSI_' />
                   <div className='flex justify-between mt-8'>
                     <button
