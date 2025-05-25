@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { VideoWrapper } from '../components'
 
 export const Route = createFileRoute('/_mainLayout/')({
   component: RouteComponent,
@@ -18,9 +19,7 @@ function RouteComponent() {
             <p className='text-md'>"Unsere Trades sind nicht nur Versprechen – sie sind Ergebnisse."<br />
               Erlebe messbare Erfolge und lerne von den Besten, die ihre<br />
               Gewinne kontinuierlich steigern.</p>
-            <div className='mx-auto max-w-7xl mt-8 mb-8'>
-              <iframe className='w-full aspect-video rounded-b-md' width="auto" height="auto" src="https://www.youtube.com/embed/Tb3jCjNIemU?si=egdcnPiQyStqbSI_" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-            </div>
+            <VideoWrapper youTubeUrl='https://www.youtube.com/embed/Tb3jCjNIemU?si=egdcnPiQyStqbSI_' className='mt-8 mb-6' />
           </div>
         </div>
       </main>
