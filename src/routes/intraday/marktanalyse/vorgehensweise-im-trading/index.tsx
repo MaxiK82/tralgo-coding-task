@@ -1,8 +1,9 @@
 import { createRoute } from '@tanstack/react-router'
 import { CheckIcon, EllipsisVerticalIcon } from '@heroicons/react/20/solid'
-import { Breadcrumb, ProgressBar, VideoWrapper } from '@/components'
 import { Route as RootRoute } from '@/routes/__root'
 import { Layout } from '@/layouts/Layout'
+import { classNames } from '@/utils'
+import { Breadcrumb, ProgressBar, VideoWrapper } from '@/components'
 
 const timeline = [
   {
@@ -69,10 +70,6 @@ const timeline = [
     iconBackground: 'bg-gray-400',
   },
 ]
-
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export const Route = createRoute({
   getParentRoute: () => RootRoute,

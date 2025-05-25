@@ -1,8 +1,8 @@
-import { createRoute } from '@tanstack/react-router'
+import { createRoute, Link } from '@tanstack/react-router'
 import { CheckIcon, EllipsisVerticalIcon } from '@heroicons/react/20/solid'
-import { Breadcrumb, ProgressBar, VideoWrapper } from '@/components'
 import { Route as RootRoute } from '@/routes/__root'
 import { Layout } from '@/layouts/Layout'
+import { Breadcrumb } from '@/components'
 
 const timeline = [
   {
@@ -70,10 +70,6 @@ const timeline = [
   },
 ]
 
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(' ')
-}
-
 export const Route = createRoute({
   getParentRoute: () => RootRoute,
   path: 'intraday/marktanalyse',
@@ -97,22 +93,38 @@ function RouteComponent() {
                   Academy Lernvideo
                 </h2>
                 <div className="overflow-hidden rounded-lg bg-white shadow-sm p-6">
-                  <p className='mb-4 font-bold text-2xl text-tralgo-matisse-700'>Marktanalyse</p>
-                  <VideoWrapper youTubeUrl='https://www.youtube.com/embed/Tb3jCjNIemU?si=egdcnPiQyStqbSI_' />
-                  <div className='flex justify-between mt-8'>
-                    <button
-                      type="button"
-                      className="rounded-md bg-gray-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-tralgo-matisse-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tralgo-matisse-300"
-                    >
-                      Vorherige Thema
-                    </button>
-                    <button
-                      type="button"
-                      className="rounded-md bg-tralgo-matisse-700 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-tralgo-matisse-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tralgo-matisse-300"
-                    >
-                      Nächste Thema
-                    </button>
-                  </div>
+                  <p className='mb-4 font-bold text-2xl text-tralgo-matisse-700'>Phase 4: Die Marktanalyse</p>
+                  <p className='mb-2'>In dieser Phase lernst du, wie du den Markt analysierst. Dabei geht es um die allgemeine Analyse des Marktes und um spezielle Techniken wie die Volumenanalyse.</p>
+                  <ul className='pl-4 list-disc list-outside text-sm leading-6 mb-2'>
+                    <li>
+                      <span className='text-tralgo-matisse-700'><Link to='/intraday/marktanalyse/vorgehensweise-im-trading/'><b>Tradingarten und Stile</b></Link></span><br />
+                      <span className='text-gray-600'>Lerne unterschiedliche Arten des Tradings und verschiedene Handelsstile kennen.</span>
+                    </li>
+                    <li>
+                      <span className='text-tralgo-matisse-700'>Analysen - technisch</span><br />
+                      <span className='text-gray-600'>Vertiefe dein Verständnis für die Volumenanalyse und ihre Anwendung im Trading.</span>
+                    </li>
+                    <li>
+                      <span className='text-tralgo-matisse-700'>Analysen - theoretisch</span><br />
+                      <span className='text-gray-600'>Erfahre mehr über theoretische Analysen und wie sie deine TradingEntscheidungen beeinflussen können.</span>
+                    </li>
+                    <li>
+                      <span className='text-tralgo-matisse-700'>Analysen - analytisch</span><br />
+                      <span className='text-gray-600'>Tauche in die Marktanalyse ein und lerne, wie wir unsere Marktanalyse anfertigen.</span>
+                    </li>
+                    <li>
+                      <span className='text-tralgo-matisse-700'>Das Volumenprofil</span><br />
+                      <span className='text-gray-600'>Richte unser Volumenprofil in der Software ein.</span>
+                    </li>
+                    <li>
+                      <span className='text-tralgo-matisse-700'>Eigenständige Analysen</span><br />
+                      <span className='text-gray-600'>Lerne, eigenständig Analysen durchzuführen und den Markt zu interpretieren</span>
+                    </li>
+                    <li>
+                      <span className='text-tralgo-matisse-700'>Zusammenfassung der Phase "Die Marktanalyse"</span><br />
+                      <span className='text-gray-600'>Mit dem Erlernen der Marktanalyse hast du einen weiteren Schritt zum profitablen Trader geschafft</span>
+                    </li>
+                  </ul>
                 </div>
               </section>
             </div>
@@ -123,50 +135,19 @@ function RouteComponent() {
                 <h2 id="section-2-title" className="sr-only">
                   Navigation im Themem-Bereich
                 </h2>
-                <div className="overflow-hidden rounded-lg bg-white shadow-sm mb-8">
-                  <div className="p-6">
-                    <ProgressBar headline='Fortschritt' progress='75' />
-                  </div>
-                </div>
                 <div className="overflow-hidden rounded-lg bg-white shadow-sm">
-                  <div className="flow-root p-6">
-                    <p className='mb-4 font-bold text-2xl text-tralgo-matisse-700'>Tradingarten und Stile</p>
-                    <ul role="list" className="-mb-8">
-                      {timeline.map((event, eventIdx) => (
-                        <li key={event.id}>
-                          <div className="relative pb-8">
-                            {eventIdx !== timeline.length - 1 ? (
-                              <span aria-hidden="true" className="absolute top-3 left-3 -ml-px h-full w-0.5 bg-gray-200" />
-                            ) : null}
-                            <div className="relative flex space-x-3">
-                              <div>
-                                <span
-                                  className={classNames(
-                                    event.iconBackground,
-                                    'flex size-6 items-center justify-center rounded-full ring-6 ring-white',
-                                  )}
-                                >
-                                  <event.icon aria-hidden="true" className="size-3 text-white" />
-                                </span>
-                              </div>
-                              <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1">
-                                <div>
-                                  <p className="text-sm text-gray-500">
-                                    {event.content}{' '}
-                                    <a href={event.href} className="font-medium text-gray-900">
-                                      {event.target}
-                                    </a>
-                                  </p>
-                                </div>
-                                <div className="text-right text-sm whitespace-nowrap text-gray-500">
-                                  <div>{event.duration}</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
+                  <div className="p-6">
+                    <img src="/img/tralgo-capital.png" alt="Tralgo-Capital Teaser" />
+                    <p className='text-2xl text-tralgo-matisse-700 mb-2'>Prop-Trading auf einem neuen Level!</p>
+                    <p className='mb-2 text-sm'>Als TRALGO Kunde hast du exklusiv die Möglichkeit von den einzigartigen Vorteilen von TRALGO Capital zu profitieren. Denn im Vergleich zu herkömmlichen Prop-Trading-Anbietern hast du kein pauschalisiertes Regelwerk, sondern die Interessen und stärken von DIR stehen im Vordergrund:</p>
+                    <ul className='list-disc list-inside text-sm leading-6 mb-2'>
+                      <li>Flexibles Regelwerk - DU Entscheidest!</li>
+                      <li>Maßgeschneidertes Kontomodell - Für Scalper, Hybrid oder Intraday-Trader</li>
+                      <li>KEINE Auszahlungslimits!</li>
+                      <li>Sicherheit und Transparenz - Du kennst uns!</li>
+                      <li>ATAS &amp; DxFeed in deiner Gebühr kostenfrei inklusive! </li>
                     </ul>
+                    <p><b>Starte jetzt deine Reise für nur 247€, denk dran: "Günstig kauft sich zweimal"</b></p>
                   </div>
                 </div>
               </section>
