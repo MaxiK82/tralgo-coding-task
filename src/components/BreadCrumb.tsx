@@ -1,12 +1,16 @@
 import { HomeIcon } from '@heroicons/react/20/solid'
 
-const pages = [
-  { name: 'Intraday', href: '/intraday/', current: false },
-  { name: 'Phase 4: Die Marktanalyse', href: '/intraday/marktanalyse/', current: true },
-  { name: 'Tradingarten und Stile', href: '/intraday/marktanalyse/vorgehensweise-im-trading/', current: true },
-]
+interface IPage {
+  name: string,
+  href: string,
+  current: boolean
+}
 
-export const Breadcrumb = () => {
+interface IBreadcrumb {
+  pages: IPage[]
+}
+
+export const Breadcrumb = ({ pages }: IBreadcrumb) => {
   return (
     <div className='mx-auto max-w-3xl lg:max-w-[1920px]'>
       <nav aria-label="Breadcrumb" className="flex border-b border-gray-200 bg-white max-w-3xl px-4 sm:px-6 lg:px-8 lg:max-w-[1856px] mb-8 mx-8 rounded-md">
@@ -34,7 +38,7 @@ export const Breadcrumb = () => {
                 <a
                   href={page.href}
                   aria-current={page.current ? 'page' : undefined}
-                  className="ml-4 text-sm font-medium text-tralgo-matisse-700 hover:text-gray-700"
+                  className={`ml-4 text-sm  text-tralgo-matisse-700 hover:text-gray-700 ${page.current ? "font-bold" : "font-medium"}`}
                 >
                   {page.name}
                 </a>

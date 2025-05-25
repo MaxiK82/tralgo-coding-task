@@ -1,15 +1,12 @@
-import { createRoute, useRouterState, Link } from '@tanstack/react-router'
+import { createRoute, Link } from '@tanstack/react-router'
 import { Route as RootRoute } from '@/routes/__root'
 import { Layout } from '@/layouts/Layout'
 import { Breadcrumb } from '@/components'
 
 export const Route = createRoute({
   getParentRoute: () => RootRoute,
-  path: 'intraday',
+  path: '/intraday',
   component: () => {
-    const matches = useRouterState({ select: (s) => s.matches });
-    console.log(useRouterState());
-
     return (
       <Layout>
         <RouteComponent />
@@ -18,11 +15,15 @@ export const Route = createRoute({
   },
 })
 
+const pages = [
+  { name: 'Intraday', href: '/intraday/', current: true },
+]
+
 function RouteComponent() {
   return (
     <>
       <main className="-mt-24 pb-8">
-        <Breadcrumb />
+        <Breadcrumb pages={pages} />
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 lg:max-w-[1920px]">
           <h1 className="sr-only">Academy</h1>
           {/* Main 3 column grid */}
@@ -72,7 +73,6 @@ function RouteComponent() {
           </div>
         </div>
       </main>
-
     </>
   )
 }

@@ -8,5 +8,4 @@ export const LoaderSpinner = () => {
       <span className="sr-only">Loading...</span>
     </div>
   )
-
 }

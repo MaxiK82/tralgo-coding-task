@@ -1,87 +1,30 @@
 import { createRoute, Link } from '@tanstack/react-router'
-import { CheckIcon, EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { Route as RootRoute } from '@/routes/__root'
 import { Layout } from '@/layouts/Layout'
 import { Breadcrumb } from '@/components'
 
-const timeline = [
-  {
-    id: 1,
-    content: 'Kapitel:',
-    target: 'Vorgehensweisen im Trading',
-    href: '#',
-    duration: "20 Minuten",
-    icon: CheckIcon,
-    iconBackground: 'bg-tralgo-matisse-700',
-  },
-  {
-    id: 2,
-    content: 'Kapitel:',
-    target: 'Die Strategie',
-    href: '#',
-    duration: "9 Minuten",
-    icon: EllipsisVerticalIcon,
-    iconBackground: 'bg-gray-400',
-  },
-  {
-    id: 3,
-    content: 'Kapitel:',
-    target: 'News Trading',
-    href: '#',
-    duration: "12 Minuten",
-    icon: EllipsisVerticalIcon,
-    iconBackground: 'bg-gray-400',
-  },
-  {
-    id: 4,
-    content: 'Kapitel:',
-    target: 'Algo Trading',
-    href: '#',
-    duration: "15 Minuten",
-    icon: EllipsisVerticalIcon,
-    iconBackground: 'bg-gray-400',
-  },
-  {
-    id: 5,
-    content: 'Kapitel:',
-    target: 'Technische Analyse',
-    href: '#',
-    duration: "19 Minuten",
-    icon: EllipsisVerticalIcon,
-    iconBackground: 'bg-gray-400',
-  },
-  {
-    id: 6,
-    content: 'Kapitel:',
-    target: 'Price-Action',
-    href: '#',
-    duration: "5 Minuten",
-    icon: EllipsisVerticalIcon,
-    iconBackground: 'bg-gray-400',
-  },
-  {
-    id: 7,
-    content: 'Kapitel:',
-    target: 'Das Volumen Trading',
-    href: '#',
-    duration: "31 Minuten",
-    icon: EllipsisVerticalIcon,
-    iconBackground: 'bg-gray-400',
-  },
-]
-
 export const Route = createRoute({
   getParentRoute: () => RootRoute,
-  path: 'intraday/marktanalyse',
-  component: () => <Layout><RouteComponent /></Layout>,
+  path: '/intraday/marktanalyse',
+  component: () => {
+    return (
+      <Layout>
+        <RouteComponent />
+      </Layout>
+    )
+  },
 })
 
+const pages = [
+  { name: 'Intraday', href: '/intraday/', current: false },
+  { name: 'Phase 4: Die Marktanalyse', href: '/intraday/marktanalyse/', current: true },
+]
 
 function RouteComponent() {
   return (
     <>
       <main className="-mt-24 pb-8">
-        <Breadcrumb />
+        <Breadcrumb pages={pages} />
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 lg:max-w-[1920px]">
           <h1 className="sr-only">Academy</h1>
           {/* Main 3 column grid */}
@@ -97,7 +40,7 @@ function RouteComponent() {
                   <p className='mb-2'>In dieser Phase lernst du, wie du den Markt analysierst. Dabei geht es um die allgemeine Analyse des Marktes und um spezielle Techniken wie die Volumenanalyse.</p>
                   <ul className='pl-4 list-disc list-outside text-sm leading-6 mb-2'>
                     <li>
-                      <span className='text-tralgo-matisse-700'><Link to='/intraday/marktanalyse/vorgehensweise-im-trading/'><b>Tradingarten und Stile</b></Link></span><br />
+                      <span className='text-tralgo-matisse-700'><Link to="/intraday/marktanalyse/vorgehensweise-im-trading"><b>Tradingarten und Stile</b></Link></span><br />
                       <span className='text-gray-600'>Lerne unterschiedliche Arten des Tradings und verschiedene Handelsstile kennen.</span>
                     </li>
                     <li>
@@ -155,7 +98,6 @@ function RouteComponent() {
           </div>
         </div>
       </main>
-
     </>
   )
 }

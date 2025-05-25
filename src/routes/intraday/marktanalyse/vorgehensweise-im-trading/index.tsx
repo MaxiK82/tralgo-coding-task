@@ -73,15 +73,27 @@ const timeline = [
 
 export const Route = createRoute({
   getParentRoute: () => RootRoute,
-  path: 'intraday/marktanalyse/vorgehensweise-im-trading',
-  component: () => <Layout><RouteComponent /></Layout>,
+  path: '/intraday/marktanalyse/vorgehensweise-im-trading',
+  component: () => {
+    return (
+      <Layout>
+        <RouteComponent />
+      </Layout>
+    )
+  },
 })
+
+const pages = [
+  { name: 'Intraday', href: '/intraday/', current: false },
+  { name: 'Phase 4: Die Marktanalyse', href: '/intraday/marktanalyse/', current: false },
+  { name: 'Tradingarten und Stile', href: '/intraday/marktanalyse/vorgehensweise-im-trading/', current: true },
+]
 
 function RouteComponent() {
   return (
     <>
       <main className="-mt-24 pb-8">
-        <Breadcrumb />
+        <Breadcrumb pages={pages} />
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 lg:max-w-[1920px]">
           <h1 className="sr-only">Academy</h1>
           {/* Main 3 column grid */}
@@ -170,7 +182,6 @@ function RouteComponent() {
           </div>
         </div>
       </main>
-
     </>
   )
 }
