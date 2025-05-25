@@ -17,7 +17,7 @@ export const Breadcrumb = ({ pages }: IBreadcrumb) => {
         <ol role="list" className="mx-auto flex w-full space-x-4 px-4 sm:px-6 lg:px-8">
           <li className="flex">
             <div className="flex items-center">
-              <a href="/academy" className="text-tralgo-matisse-700 hover:text-gray-500">
+              <a href="/" className="text-tralgo-matisse-700 hover:text-gray-500">
                 <HomeIcon aria-hidden="true" className="size-5 shrink-0" />
                 <span className="sr-only">Home</span>
               </a>
